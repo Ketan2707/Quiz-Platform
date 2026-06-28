@@ -5,8 +5,8 @@ const questions = require("./data/questions");
 const app = express();
 const PORT = 8080;
 
-// Allow requests from React frontend
-app.use(cors({ origin: "http://localhost:5173" }));
+// Allow requests from any origin (local dev + any deployed frontend)
+app.use(cors());
 app.use(express.json());
 
 /**

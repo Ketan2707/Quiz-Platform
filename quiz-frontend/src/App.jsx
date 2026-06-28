@@ -14,8 +14,8 @@ const PAGE = {
   RESULT: "result",
 };
 
-// Backend base URL — proxied through Vite to http://localhost:8080
-const API_BASE = "/api";
+// Backend base URL — deployed on Render
+const API_BASE = "https://quiz-platform-mpuo.onrender.com/api";
 
 function App() {
   const [page, setPage] = useState(PAGE.HOME);
