@@ -1,0 +1,4 @@
+com\quizportal\controller\QuizController.class
+com\quizportal\model\Question.class
+com\quizportal\QuizBackendApplication.class
+com\quizportal\data\QuestionStore.class
