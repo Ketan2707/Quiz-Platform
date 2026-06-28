@@ -1,102 +1,107 @@
 # Quiz Portal — Full Stack Quiz Platform
 
-A full-stack quiz platform built with **React (Vite)** on the frontend and **Spring Boot** on the backend.
+A full-stack quiz platform built with **React (Vite)** on the frontend and **Node.js + Express** on the backend.
+
+## Tech Stack
+
+| Layer     | Technology          |
+|-----------|---------------------|
+| Frontend  | React + Vite        |
+| Backend   | Node.js + Express   |
+| Database  | None (in-memory)    |
+
+---
 
 ## Project Structure
 
 ```
 /
-├── quiz-frontend/     ← React + Vite (UI)
-└── quiz-backend/      ← Spring Boot (REST API)
+├── quiz-frontend/        ← React + Vite (UI)
+│   └── src/
+│       ├── App.jsx
+│       ├── App.css
+│       └── components/
+│           ├── Navbar.jsx
+│           ├── HomePage.jsx
+│           ├── DifficultyPage.jsx
+│           ├── QuizPage.jsx
+│           └── ResultPage.jsx
+│
+├── quiz-backend-node/    ← Node.js + Express (API)
+│   ├── server.js         ← Express server + API routes
+│   ├── data/
+│   │   └── questions.js  ← All 75 questions in memory
+│   └── package.json
+│
+├── start-backend.bat     ← Double-click to start backend
+└── start-frontend.bat    ← Double-click to start frontend
 ```
 
 ---
 
-## Subjects Covered
+## Subjects
 
-| Subject | ID |
-|---|---|
-| Data Structures & Algorithms | `dsa` |
-| Numerical Methods | `numerical` |
-| Full Stack Development | `fullstack` |
-| Database Management Systems | `dbms` |
-| Computer Networks | `cn` |
+| Subject                        | ID          | Questions |
+|-------------------------------|-------------|-----------|
+| Data Structures & Algorithms  | `dsa`       | 15        |
+| Numerical Methods             | `numerical` | 15        |
+| Full Stack Development        | `fullstack` | 15        |
+| Database Management Systems   | `dbms`      | 15        |
+| Computer Networks             | `cn`        | 15        |
 
-Each subject has **15 questions** — 5 Easy, 5 Medium, 5 Hard.
+Each subject has 5 Easy + 5 Medium + 5 Hard questions.
 
 ---
 
 ## How to Run
 
-### 1. Start the Backend (Spring Boot)
-
-Requirements: Java 17+, Maven
-
-```bash
-cd quiz-backend
-mvn spring-boot:run
+### Step 1 — Start Backend
+Double-click **`start-backend.bat`**
+OR open a terminal in `quiz-backend-node` and run:
+```
+node server.js
+```
+You should see:
+```
+Quiz Backend running at http://localhost:8080
 ```
 
-The backend runs on **http://localhost:8080**
-
-### 2. Start the Frontend (React + Vite)
-
-Requirements: Node.js 18+
-
-```bash
-cd quiz-frontend
-npm install
+### Step 2 — Start Frontend
+Double-click **`start-frontend.bat`**
+OR open a terminal in `quiz-frontend` and run:
+```
 npm run dev
 ```
-
-The frontend runs on **http://localhost:5173**
+Then open **http://localhost:5173** in your browser.
 
 ---
 
 ## API Endpoints
 
 | Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/questions?subject=dsa&difficulty=easy` | Get questions |
-| GET | `/api/subjects` | List all subjects |
+|--------|----------|-------------|
 | GET | `/api/health` | Health check |
+| GET | `/api/subjects` | List all subjects |
+| GET | `/api/questions?subject=dsa&difficulty=easy` | Get questions |
 
 ---
 
-## Architecture (Simple Explanation for Teacher)
+## Architecture (for teacher explanation)
 
 ```
-Browser (React)
-     |
-     | HTTP GET /api/questions?subject=dsa&difficulty=easy
-     |
-Spring Boot Controller (QuizController.java)
-     |
-     | calls
-     |
-QuestionStore.java  ← All questions stored in memory (no database)
-     |
-     | returns List<Question>
-     |
-JSON Response → React renders the quiz
+Browser (React + Vite)
+        |
+        |  HTTP GET /api/questions?subject=dsa&difficulty=easy
+        |
+Node.js + Express  (server.js)
+        |
+        |  filters the array
+        |
+questions.js  ← 75 questions stored as a JS array (no database)
+        |
+        |  returns JSON
+        |
+React renders the quiz, tracks answers, shows result
 ```
 
-**No database is used.** All questions are stored in `QuestionStore.java` as Java objects.
-
----
-
-## Key Files
-
-### Frontend
-- `src/App.jsx` — Main app, manages page navigation and API calls
-- `src/components/HomePage.jsx` — Subject selection grid
-- `src/components/DifficultyPage.jsx` — Easy/Medium/Hard selection
-- `src/components/QuizPage.jsx` — Quiz with timer and answer feedback
-- `src/components/ResultPage.jsx` — Score, stats, and answer review
-- `src/App.css` — All styles
-
-### Backend
-- `QuizBackendApplication.java` — Spring Boot entry point
-- `model/Question.java` — Question data model
-- `data/QuestionStore.java` — All 75 questions stored in memory
-- `controller/QuizController.java` — REST API endpoints
+No database, no Java, no Maven. Just JavaScript end to end.
